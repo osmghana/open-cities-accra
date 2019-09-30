@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/akweteyman_sections_1.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[5.60842748276393,-0.24967832434490903],[5.620082664384584,-0.22871438380610923]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OCAAkweteyman_0 = L.tileLayer('https://tiles.openaerialmap.org/5bb9323e9ed15b0006d24f33/0/5bb9323e9ed15b0006d24f34/{z}/{x}/{y}', {
+            opacity: 1.0,
+            attribution: '',
+        });
+        layer_OCAAkweteyman_0;
+        map.addLayer(layer_OCAAkweteyman_0);
+        function pop_akweteyman_sections_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_akweteyman_sections_1_0() {
+            return {
+                pane: 'pane_akweteyman_sections_1',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 4.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_akweteyman_sections_1');
+        map.getPane('pane_akweteyman_sections_1').style.zIndex = 401;
+        map.getPane('pane_akweteyman_sections_1').style['mix-blend-mode'] = 'normal';
+        var layer_akweteyman_sections_1 = new L.geoJson(json_akweteyman_sections_1, {
+            attribution: '',
+            pane: 'pane_akweteyman_sections_1',
+            onEachFeature: pop_akweteyman_sections_1,
+            style: style_akweteyman_sections_1_0,
+        });
+        bounds_group.addLayer(layer_akweteyman_sections_1);
+        map.addLayer(layer_akweteyman_sections_1);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/akweteyman_sections_1.png" /> akweteyman_sections': layer_akweteyman_sections_1,"OCA Akweteyman": layer_OCAAkweteyman_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_akweteyman_sections_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['id'] !== null?String('<div style="color: #000000; font-size: 16pt; font-weight: bold; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['id']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_akweteyman_sections_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_akweteymansections_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_akweteymansections_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_akweteymansections_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_akweteymansections_1]);
+        });
+        </script>
+    </body>
+</html>
