@@ -1,0 +1,85 @@
+{
+    "addr_city": {
+        "default": "Accra",
+        "required": true
+    },
+    "addr_community": {
+        "default": "Akweteyman",
+        "required": true
+    },
+    "building": {
+        "select_multiple": false,
+        "required": true
+    },
+    "building_levels": {
+        "hide_if": {
+            "building": "none"
+        },
+        "select_multiple": false,
+        "numeric": true,
+        "required": true,
+        "custom_value": true
+    },
+    "building_material": {
+        "hide_if": {
+            "building": "none"
+        },
+        "required": true,
+        "select_multiple": false,
+        "custom_value": true
+    },
+    "roof_material": {
+        "required": false,
+        "select_multiple": false,
+        "custom_value": true
+    },
+    "amenity": {
+        "hide_if": {
+            "building": "residential",
+            "shop": true,
+            "tourism": true,
+            "office": true
+        },
+        "custom_value": true
+    },
+    "office": {
+        "hide_if": {
+            "building": "residential",
+            "amenity": true,
+            "tourism": true,
+            "shop": true
+        },
+        "custom_value": true
+    },
+    "tourism": {
+        "hide_if": {
+            "building": "residential",
+            "amenity": true,
+            "shop": true,
+            "office": true
+        },
+        "custom_value": true
+    },
+    "opening_hours": {
+        "select_multiple": true,
+        "custom_value": true
+    },
+    "religion": {
+        "show_if": {
+            "amenity": "place_of_worship"
+        }
+    },
+    "denomination": {
+        "show_if": {
+            "religion": true
+        }
+    },
+    "shop": {
+        "custom_value": true,
+        "hide_if": {
+            "building": "residential",
+            "amenity": true,
+            "office": true
+        }
+    }
+}
